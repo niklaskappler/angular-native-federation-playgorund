@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'as-produktion', // TODO: auf Rückmeldung von CF warten
+    path: 'produktion',
     children: [
       {
         path: '',
@@ -28,7 +28,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'as-produktion',
+    redirectTo: 'produktion',
     pathMatch: 'full'
   }
 ];

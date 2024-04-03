@@ -213,11 +213,10 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:application",
+					"builder": "ngx-build-plus:browser",
 					"options": {
 						"outputPath": "dist/mfe1",
 						"index": "projects/mfe1/src/index.html",
-						"browser": "projects/mfe1/src/main.ts",
 						"polyfills": [
 							"zone.js"
 						],
@@ -230,7 +229,10 @@
 						"styles": [
 							"projects/mfe1/src/styles.scss"
 						],
-						"scripts": []
+						"scripts": [],
+						"main": "projects/mfe1/src/main.ts",
+						"extraWebpackConfig": "projects/mfe1/webpack.config.js",
+						"commonChunk": false
 					},
 					"configurations": {
 						"production": {
@@ -246,7 +248,8 @@
 									"maximumError": "4kb"
 								}
 							],
-							"outputHashing": "all"
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/mfe1/webpack.prod.config.js"
 						},
 						"development": {
 							"optimization": false,
@@ -257,21 +260,28 @@
 					"defaultConfiguration": "production"
 				},
 				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
+					"builder": "ngx-build-plus:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "mfe1:build:production"
+							"buildTarget": "mfe1:build:production",
+							"extraWebpackConfig": "projects/mfe1/webpack.prod.config.js"
 						},
 						"development": {
 							"buildTarget": "mfe1:build:development"
 						}
 					},
-					"defaultConfiguration": "development"
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4201,
+						"publicHost": "http://localhost:4201",
+						"extraWebpackConfig": "projects/mfe1/webpack.config.js"
+					}
 				},
 				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"builder": "ngx-build-plus:extract-i18n",
 					"options": {
-						"buildTarget": "mfe1:build"
+						"buildTarget": "mfe1:build",
+						"extraWebpackConfig": "projects/mfe1/webpack.config.js"
 					}
 				},
 				"test": {
